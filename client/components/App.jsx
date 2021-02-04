@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Start from './Start'
-// import Game from './Game'
+import Game from './Game'
 
 function App() {
   const [showInstructions, setShowInstructions] = useState(true)
@@ -12,7 +12,7 @@ function App() {
   return (
     <div className='game-container'>
       {showInstructions && <Start startGame={startGame} />}
-      {/* {!showInstructions && <Game />} */}
+      {!showInstructions && <Game />}
     </div>
   )
 }
