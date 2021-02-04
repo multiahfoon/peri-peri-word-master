@@ -1,18 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { getSynos } from '../api'
 
 export default function Game () {
   const [userGuess, setGuess] = useState('')
 
+  const [randomWord, setRandomWord] = useState(null)
+
+  useEffect(() => {
+    getSynos()
+      .then(res => {
+        setRandomWord(res)
+        return null
+      })
+      .catch(err => console.log(err))
+  }, [])
+
   function handleSubmit (e) {
     e.preventDefault()
-    console.log(userGuess)
-    // setGuess(e.target.value)
+    setGuess(e.target.value)
   }
 
   function handleChange (e) {
     setGuess(e.target.value)
   }
 
+  console.log(randomWord)
   // if(userGuess === /* random word synonym */ ){
   //   //run correct function
   // } else {
@@ -23,7 +35,7 @@ export default function Game () {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>{/* RANDOM WORD */}WORD</h1>
+      <h1>{randomWord ? randomWord.word : null}</h1>
       <label htmlFor='userGuess' >Enter word here:</label>
       <input onChange={handleChange} type='text' id="userGuess" name="userGuess" value={userGuess}></input>
       <button type='submit' value='submit' >Submit</button>

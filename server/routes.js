@@ -19,7 +19,8 @@ server.get('/', (req, res) => {
     .then(apiRes => {
       const result = apiRes.body
       console.log(apiRes.body)
-      return res.json(result)
+      res.json(result)
+      return null
     })
     .catch(err => console.log(err))
 })
