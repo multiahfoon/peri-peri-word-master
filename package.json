@@ -1,6 +1,6 @@
 {
-  "name": "Peri-Peri Word Master",
-  "version": "1.0",
+  "name": "peri-peri-word-master",
+  "version": "1.0.0",
   "description": "Word Master",
   "repository": "https://github.com/harakeke-2021/peri-peri-word-master.git",
   "main": "server/index.js",
