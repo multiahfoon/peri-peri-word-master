@@ -1,14 +1,19 @@
-import React from 'react'
-
-// COMPONENTS
+import React, { useState } from 'react'
+import Start from './Start'
 import Game from './Game'
 
-const App = () => {
+function App() {
+  const [showInstructions, setShowInstructions] = useState(true)
+
+  function startGame() {
+    setShowInstructions(false)
+  }
+
   return (
-    <>
-      <div>Test</div>
-      <Game />
-    </>
+    <div className='game-container'>
+      {showInstructions && <Start startGame={startGame} />}
+      {!showInstructions && <Game />}
+    </div>
   )
 }
 
