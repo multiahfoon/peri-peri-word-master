@@ -1,7 +1,11 @@
 const express = require('express')
 const request = require('superagent')
 const server = express()
-const randomWord = 'lovely'
+
+const random = require('./random')
+const words = require('./words')
+const randomWord = random.randomWord(words)
+
 const apiUrl = `https://wordsapiv1.p.rapidapi.com/words/${randomWord}/synonyms`
 require('dotenv').config()
 const apiKey = process.env.key
