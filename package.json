@@ -1,8 +1,8 @@
 {
-  "name": "boilerplate-react-webpack",
-  "version": "0.2.3",
-  "description": "A webpack React starter",
-  "repository": "https://github.com/dev-academy-challenges/boilerplate-react-webpack.git",
+  "name": "Peri-Peri Word Master",
+  "version": "1.0",
+  "description": "Word Master",
+  "repository": "https://github.com/harakeke-2021/peri-peri-word-master.git",
   "main": "server/index.js",
   "author": "EDA",
   "license": "ISC",
@@ -41,8 +41,6 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "knex": "^0.21.17",
-    "sqlite3": "^5.0.1",
     "superagent": "^6.1.0"
   },
   "devDependencies": {
