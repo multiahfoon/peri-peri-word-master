@@ -1,12 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function Game () {
+  const [userGuess, setGuess] = useState('')
+
+  function handleSubmit (e) {
+    e.preventDefault()
+    console.log(userGuess)
+    // setGuess(e.target.value)
+  }
+
+  function handleChange (e) {
+    setGuess(e.target.value)
+  }
+
+  // if(userGuess === /* random word synonym */ ){
+  //   //run correct function
+  // } else {
+  //   //run incorrect function
+  // }
+
+  // // userGuess === synonym ? correct : incorrect
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h1>{/* RANDOM WORD */}WORD</h1>
       <label htmlFor='userGuess' >Enter word here:</label>
-      <input type='text' id="userGuess" name="userGuess"></input>
-      <button>Submit</button>
+      <input onChange={handleChange} type='text' id="userGuess" name="userGuess" value={userGuess}></input>
+      <button type='submit' value='submit' >Submit</button>
     </form>
 
   )
