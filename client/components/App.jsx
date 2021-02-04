@@ -11,6 +11,7 @@ function App() {
 
   return (
     <div className='game-container'>
+      <h1>Peri Peri Game Master</h1>
       {showInstructions && <Start startGame={startGame} />}
       {!showInstructions && <Game />}
     </div>
