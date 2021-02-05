@@ -2,8 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { getSynos } from '../api'
 
 export default function Game () {
-  const [userGuess, setGuess] = useState('')
+  const correctStyle = {
+    display: 'none'
+  }
 
+  const incorrectStyle = {
+    display: 'none'
+  }
+
+  const [userGuess, setGuess] = useState('')
+  const [correct, setCorrect] = useState(correctStyle)
+  const [incorrect, setIncorrect] = useState(incorrectStyle)
   const [randomWord, setRandomWord] = useState(null)
 
   useEffect(() => {
@@ -17,7 +26,7 @@ export default function Game () {
 
   function handleSubmit (e) {
     e.preventDefault()
-    
+
     const compare = randomWord.synonyms.filter(synon => {
       if (userGuess === synon) {
         return synon
@@ -26,8 +35,20 @@ export default function Game () {
 
     if (userGuess === compare[0]) {
       console.log('correct')
+      setIncorrect({
+        display: 'none'
+      })
+      setCorrect({
+        display: 'block'
+      })
     } else {
       console.log('incorrect')
+      setCorrect({
+        display: 'none'
+      })
+      setIncorrect({
+        display: 'block'
+      })
     }
   }
 
@@ -43,6 +64,8 @@ export default function Game () {
       <label htmlFor='userGuess' >Enter word here:</label>
       <input onChange={handleChange} type='text' id="userGuess" name="userGuess" value={userGuess}></input>
       <button type='submit' value='submit' >Submit</button>
+      <h3 style={correct}>CORRECT!</h3>
+      <h3 style={incorrect}>TRY AGAIN</h3>
     </form>
 
   )
