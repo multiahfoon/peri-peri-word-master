@@ -34,13 +34,17 @@ export default function Game () {
   // // userGuess === synonym ? correct : incorrect
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>{randomWord ? randomWord.word : null}</h1>
-      <label htmlFor='userGuess' >Enter word here:</label>
-      <input onChange={handleChange} type='text' id="userGuess" name="userGuess" value={userGuess}></input>
-      <button type='submit' value='submit' >Submit</button>
-    </form>
-
+    <div className='game'>
+      <h3 className='randomWord'>{randomWord ? randomWord.word : null}</h3>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor='userGuess' >Enter synonym here:</label>
+        <br/>
+        <input onChange={handleChange} type='text' id="userGuess" name="userGuess" value={userGuess}></input>
+        <div className='submitContainer'>
+          <button type='submit' value='submit' className='submitButton'>Submit</button>
+        </div>
+      </form>
+    </div>
   )
 }
 

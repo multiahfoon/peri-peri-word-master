@@ -1,13 +1,15 @@
 import React from 'react'
 
-function Start(props) {
+function Start (props) {
   const startGame = props.startGame
   const instructions =
-    'How to play: Type in a synonym of the word and press Enter '
+    'How to play: Guess a synonym of the random word and press submit '
   return (
     <div className='start'>
-      <p>{instructions}</p>
-      <button onClick={startGame}>Start Game</button>
+      <p className='instructions'>{instructions}</p>
+      <div className='buttonContainer'>
+        <button onClick={startGame} className='startButton'>Start Game</button>
+      </div>
     </div>
   )
 }
