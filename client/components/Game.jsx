@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { getSynos } from '../api'
 
-export default function Game() {
+export default function Game () {
   const hide = {
-    display: 'none',
+    display: 'none'
   }
 
   const show = {
-    display: 'block',
+    display: 'block'
   }
 
   const [userGuess, setGuess] = useState('')
@@ -15,7 +15,7 @@ export default function Game() {
   const [incorrect, setIncorrect] = useState(hide)
   const [randomWord, setRandomWord] = useState(null)
 
-  function getRandomWord() {
+  function getRandomWord () {
     console.log('running getrand')
     setGuess('')
     setIncorrect(hide)
@@ -30,7 +30,7 @@ export default function Game() {
 
   useEffect(getRandomWord, [])
 
-  function handleSubmit(e) {
+  function handleSubmit (e) {
     e.preventDefault()
 
     const compare = randomWord.synonyms.filter((synon) => {
@@ -53,31 +53,36 @@ export default function Game() {
     }
   }
 
-  function handleChange(e) {
+  function handleChange (e) {
     setGuess(e.target.value)
   }
 
   console.log(randomWord)
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>{randomWord ? randomWord.word : null}</h1>
-      <label htmlFor='userGuess'>Enter word here:</label>
-      <input
-        onChange={handleChange}
-        type='text'
-        id='userGuess'
-        name='userGuess'
-        value={userGuess}></input>
-      <button type='submit' value='submit'>
+
+    <div className='game'>
+      <h3 className='randomWord'>{randomWord ? randomWord.word : null}</h3>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor='userGuess'>Enter word here:</label>
+        <input
+          onChange={handleChange}
+          type='text'
+          id='userGuess'
+          name='userGuess'
+          value={userGuess}></input>
+        <div className='submitContainer'>
+          <button className='submitButton' type='submit' value='submit'>
         Submit
-      </button>
-      <button onClick={getRandomWord} style={correct}>
+          </button>
+        </div>
+        <button onClick={getRandomWord} style={correct}>
         CORRECT!
-      </button>
-      <button onClick={getRandomWord} style={incorrect}>
+        </button>
+        <button onClick={getRandomWord} style={incorrect}>
         TRY AGAIN
-      </button>
-    </form>
+        </button>
+      </form>
+    </div>
   )
 }
