@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { getSynos } from '../api'
 
-export default function Game () {
+export default function Game() {
   const hide = {
-    display: 'none'
+    display: 'none',
   }
 
   const show = {
-    display: 'block'
+    display: 'block',
   }
 
   const [userGuess, setGuess] = useState('')
@@ -15,25 +15,25 @@ export default function Game () {
   const [incorrect, setIncorrect] = useState(hide)
   const [randomWord, setRandomWord] = useState(null)
 
-  function getRandomWord () {
+  function getRandomWord() {
     console.log('running getrand')
     setGuess('')
     setIncorrect(hide)
     setCorrect(hide)
     return getSynos()
-      .then(res => {
+      .then((res) => {
         setRandomWord(res)
         return null
       })
-      .catch(err => console.log(err))
+      .catch((err) => {})
   }
 
   useEffect(getRandomWord, [])
 
-  function handleSubmit (e) {
+  function handleSubmit(e) {
     e.preventDefault()
 
-    const compare = randomWord.synonyms.filter(synon => {
+    const compare = randomWord.synonyms.filter((synon) => {
       if (userGuess === synon) {
         return synon
       }
@@ -53,7 +53,7 @@ export default function Game () {
     }
   }
 
-  function handleChange (e) {
+  function handleChange(e) {
     setGuess(e.target.value)
   }
 
@@ -62,12 +62,22 @@ export default function Game () {
   return (
     <form onSubmit={handleSubmit}>
       <h1>{randomWord ? randomWord.word : null}</h1>
-      <label htmlFor='userGuess' >Enter word here:</label>
-      <input onChange={handleChange} type='text' id="userGuess" name="userGuess" value={userGuess}></input>
-      <button type='submit' value='submit' >Submit</button>
-      <button onClick={getRandomWord} style={correct}>CORRECT!</button>
-      <button onClick={getRandomWord} style={incorrect}>TRY AGAIN</button>
+      <label htmlFor='userGuess'>Enter word here:</label>
+      <input
+        onChange={handleChange}
+        type='text'
+        id='userGuess'
+        name='userGuess'
+        value={userGuess}></input>
+      <button type='submit' value='submit'>
+        Submit
+      </button>
+      <button onClick={getRandomWord} style={correct}>
+        CORRECT!
+      </button>
+      <button onClick={getRandomWord} style={incorrect}>
+        TRY AGAIN
+      </button>
     </form>
-
   )
 }
