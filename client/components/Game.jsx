@@ -2,22 +2,55 @@ import React, { useEffect, useState } from 'react'
 import { getSynos } from '../api'
 
 export default function Game () {
-  const [userGuess, setGuess] = useState('')
+  const hide = {
+    display: 'none'
+  }
 
+  const show = {
+    display: 'block'
+  }
+
+  const [userGuess, setGuess] = useState('')
+  const [correct, setCorrect] = useState(hide)
+  const [incorrect, setIncorrect] = useState(hide)
   const [randomWord, setRandomWord] = useState(null)
 
-  useEffect(() => {
-    getSynos()
-      .then(res => {
+  function getRandomWord () {
+    console.log('running getrand')
+    setGuess('')
+    setIncorrect(hide)
+    setCorrect(hide)
+    return getSynos()
+      .then((res) => {
         setRandomWord(res)
         return null
       })
-      .catch(err => console.log(err))
-  }, [])
+      .catch((err) => {})
+  }
+
+  useEffect(getRandomWord, [])
 
   function handleSubmit (e) {
     e.preventDefault()
-    setGuess(e.target.value)
+
+    const compare = randomWord.synonyms.filter((synon) => {
+      if (userGuess === synon) {
+        return synon
+      }
+    })
+
+    if (userGuess === compare[0]) {
+      console.log('correct')
+      setIncorrect(hide)
+      setCorrect(show)
+    } else if (userGuess === '') {
+      console.log('incorrect')
+      setCorrect(hide)
+      setIncorrect(hide)
+    } else {
+      setCorrect(hide)
+      setIncorrect(show)
+    }
   }
 
   function handleChange (e) {
@@ -25,29 +58,31 @@ export default function Game () {
   }
 
   console.log(randomWord)
-  // if(userGuess === /* random word synonym */ ){
-  //   //run correct function
-  // } else {
-  //   //run incorrect function
-  // }
-
-  // // userGuess === synonym ? correct : incorrect
 
   return (
+
     <div className='game'>
       <h3 className='randomWord'>{randomWord ? randomWord.word : null}</h3>
       <form onSubmit={handleSubmit}>
-        <label htmlFor='userGuess' >Enter synonym here:</label>
-        <br/>
-        <input onChange={handleChange} type='text' id="userGuess" name="userGuess" value={userGuess}></input>
+        <label htmlFor='userGuess'>Enter word here:</label>
+        <input
+          onChange={handleChange}
+          type='text'
+          id='userGuess'
+          name='userGuess'
+          value={userGuess}></input>
         <div className='submitContainer'>
-          <button type='submit' value='submit' className='submitButton'>Submit</button>
+          <button className='submitButton' type='submit' value='submit'>
+        Submit
+          </button>
         </div>
+        <button onClick={getRandomWord} style={correct}>
+        CORRECT!
+        </button>
+        <button onClick={getRandomWord} style={incorrect}>
+        TRY AGAIN
+        </button>
       </form>
     </div>
   )
 }
-
-/* create function that runs list of words from array to be passed into API function and provide us with word synonym object. have user input compare ther word against
-word in synonym field of word object, if correct load correct +1 to counter - if incorrect load incorrect and no counter.
-form field to be within return of current function */
