@@ -5,16 +5,21 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import App from './App'
 
 describe('App', () => {
-  it('it displays "Game Master"', () => {
+  it('it displays "Word Master"', () => {
     render(<App />)
     const header = screen.getByRole('heading', { level: 1 })
-    expect(header).toHaveTextContent('Game Master')
+    expect(header).toHaveTextContent('Word Master')
   })
-  it('it displays "WORD"', () => {
+  it('it displays a button', () => {
     render(<App />)
     fireEvent.click(screen.getByText('Start Game'))
-    const header = screen.getAllByRole('heading', { level: 1 })
-    expect(header[1]).toHaveTextContent('WORD')
+    return screen
+      .findByRole('button')
+      .then((button) => {
+        expect(button.innerHTML).toContain('Submit')
+        return null
+      })
+      .catch((err) => console.error(err))
   })
 })
 
@@ -23,7 +28,7 @@ describe('App', () => {
     it(`Test #${i + 1}`, () => {
       render(<App />)
       const header = screen.getByRole('heading', { level: 1 })
-      expect(header).toHaveTextContent('Game Master')
+      expect(header).toHaveTextContent('Word Master')
     })
   }
 })
