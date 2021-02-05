@@ -2,27 +2,33 @@ import React, { useEffect, useState } from 'react'
 import { getSynos } from '../api'
 
 export default function Game () {
-  const correctStyle = {
+  const hide = {
     display: 'none'
   }
 
-  const incorrectStyle = {
-    display: 'none'
+  const show = {
+    display: 'block'
   }
 
   const [userGuess, setGuess] = useState('')
-  const [correct, setCorrect] = useState(correctStyle)
-  const [incorrect, setIncorrect] = useState(incorrectStyle)
+  const [correct, setCorrect] = useState(hide)
+  const [incorrect, setIncorrect] = useState(hide)
   const [randomWord, setRandomWord] = useState(null)
 
-  useEffect(() => {
-    getSynos()
+  function getRandomWord () {
+    console.log('running getrand')
+    setGuess('')
+    setIncorrect(hide)
+    setCorrect(hide)
+    return getSynos()
       .then(res => {
         setRandomWord(res)
         return null
       })
       .catch(err => console.log(err))
-  }, [])
+  }
+
+  useEffect(getRandomWord, [])
 
   function handleSubmit (e) {
     e.preventDefault()
@@ -35,20 +41,15 @@ export default function Game () {
 
     if (userGuess === compare[0]) {
       console.log('correct')
-      setIncorrect({
-        display: 'none'
-      })
-      setCorrect({
-        display: 'block'
-      })
-    } else {
+      setIncorrect(hide)
+      setCorrect(show)
+    } else if (userGuess === '') {
       console.log('incorrect')
-      setCorrect({
-        display: 'none'
-      })
-      setIncorrect({
-        display: 'block'
-      })
+      setCorrect(hide)
+      setIncorrect(hide)
+    } else {
+      setCorrect(hide)
+      setIncorrect(show)
     }
   }
 
@@ -64,13 +65,9 @@ export default function Game () {
       <label htmlFor='userGuess' >Enter word here:</label>
       <input onChange={handleChange} type='text' id="userGuess" name="userGuess" value={userGuess}></input>
       <button type='submit' value='submit' >Submit</button>
-      <h3 style={correct}>CORRECT!</h3>
-      <h3 style={incorrect}>TRY AGAIN</h3>
+      <button onClick={getRandomWord} style={correct}>CORRECT!</button>
+      <button onClick={getRandomWord} style={incorrect}>TRY AGAIN</button>
     </form>
 
   )
 }
-
-/* create function that runs list of words from array to be passed into API function and provide us with word synonym object. have user input compare ther word against
-word in synonym field of word object, if correct load correct +1 to counter - if incorrect load incorrect and no counter.
-form field to be within return of current function */
