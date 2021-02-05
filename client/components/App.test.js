@@ -5,10 +5,10 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import App from './App'
 
 describe('App', () => {
-  it('it displays "Game Master"', () => {
+  it('it displays "Word Master"', () => {
     render(<App />)
     const header = screen.getByRole('heading', { level: 1 })
-    expect(header).toHaveTextContent('Game Master')
+    expect(header).toHaveTextContent('Word Master')
   })
   it('it displays a button', () => {
     render(<App />)
@@ -28,7 +28,7 @@ describe('App', () => {
     it(`Test #${i + 1}`, () => {
       render(<App />)
       const header = screen.getByRole('heading', { level: 1 })
-      expect(header).toHaveTextContent('Game Master')
+      expect(header).toHaveTextContent('Word Master')
     })
   }
 })
