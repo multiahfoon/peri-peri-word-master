@@ -24,14 +24,13 @@ export default function Game () {
     setGuess(e.target.value)
   }
 
-  console.log(randomWord)
-  // if(userGuess === /* random word synonym */ ){
-  //   //run correct function
-  // } else {
-  //   //run incorrect function
-  // }
+  randomWord.synonyms.forEach(synon => {
+    if (userGuess === synon) {
 
-  // // userGuess === synonym ? correct : incorrect
+    } else {
+
+    }
+  })
 
   return (
     <form onSubmit={handleSubmit}>
