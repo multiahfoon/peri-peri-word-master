@@ -76,10 +76,10 @@ export default function Game () {
         Submit
           </button>
         </div>
-        <button onClick={getRandomWord} style={correct}>
+        <button onClick={getRandomWord} style={correct} className='correct'>
         CORRECT!
         </button>
-        <button onClick={getRandomWord} style={incorrect}>
+        <button onClick={getRandomWord} style={incorrect} className='tryagain'>
         TRY AGAIN
         </button>
       </form>

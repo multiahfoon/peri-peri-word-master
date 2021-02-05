@@ -12,9 +12,6 @@ function App () {
   return (
     <div className='game-container'>
       <div className='header'>
-        {/* <div className='logoContainer'>
-          <img className='logo' src='./images/hot-pepper.png' alt='chilli icon' />
-        </div> */}
         <h2 className='teamName'>Peri Peri Games</h2>
 
         <h1 className='gameName'>Word Master</h1>
