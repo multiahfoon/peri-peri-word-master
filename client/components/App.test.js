@@ -10,11 +10,16 @@ describe('App', () => {
     const header = screen.getByRole('heading', { level: 1 })
     expect(header).toHaveTextContent('Game Master')
   })
-  it('it displays "WORD"', () => {
+  it('it displays a button', () => {
     render(<App />)
     fireEvent.click(screen.getByText('Start Game'))
-    const header = screen.getAllByRole('heading', { level: 1 })
-    expect(header[1]).toHaveTextContent('WORD')
+    return screen
+      .findByRole('button')
+      .then((button) => {
+        expect(button.innerHTML).toContain('Submit')
+        return null
+      })
+      .catch((err) => console.error(err))
   })
 })
 
