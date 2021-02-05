@@ -17,20 +17,25 @@ export default function Game () {
 
   function handleSubmit (e) {
     e.preventDefault()
-    setGuess(e.target.value)
+    
+    const compare = randomWord.synonyms.filter(synon => {
+      if (userGuess === synon) {
+        return synon
+      }
+    })
+
+    if (userGuess === compare[0]) {
+      console.log('correct')
+    } else {
+      console.log('incorrect')
+    }
   }
 
   function handleChange (e) {
     setGuess(e.target.value)
   }
 
-  randomWord.synonyms.forEach(synon => {
-    if (userGuess === synon) {
-
-    } else {
-
-    }
-  })
+  console.log(randomWord)
 
   return (
     <form onSubmit={handleSubmit}>
